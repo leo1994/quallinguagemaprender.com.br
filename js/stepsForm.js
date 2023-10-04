@@ -151,7 +151,11 @@
       );
 
       if (input.name == "place") {
-        const placeValidator = new RegExp(/^[a-zA-Z\s]+,\s[A-Z]{2}$/);
+        // regex to validate place
+        // Curitiba, PR
+        // São Paulo, SP
+        // União da Vitória, PR
+        const placeValidator = new RegExp("^.+, [a-zA-Z]{2}$");
         if (!placeValidator.test(input.value)) {
           input.setCustomValidity(
             "Whoops... deve seguir o formato: Cidade, UF"
