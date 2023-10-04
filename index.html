@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Descubra Sua Linguagem de Programação Astral</title>
+    <meta
+      name="description"
+      content="Descubra a linguagem de programação que combina com a sua essência!"
+    />
+    <meta name="keywords" content="mapa astal, programação" />
+    <meta name="author" content="Leonardo" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap"
+      rel="stylesheet"
+    />
+    <meta
+      property="og:title"
+      content="Descubra Sua Linguagem de Programação Astral"
+    />
+    <meta
+      property="og:description"
+      content="Descubra a linguagem de programação que combina com a sua essência!"
+    />
+    <meta
+      property="og:image"
+      content="https://QualLinguagemAprender.com.br/img/random.png"
+    />
+    <meta property="og:url" content="https://QualLinguagemAprender.com.br" />
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Clicker+Script"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <script src="js/modernizr.custom.js"></script>
+  </head>
+  <body>
+    <div id="large-header" class="large-header">
+      <canvas id="canvas"></canvas>
+      <div class="carousel">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <h1>Descubra Sua Linguagem de Programação Astral</h1>
+          </div>
+          <div class="swiper-slide" id="description"></div>
+          <div class="swiper-slide">
+            <form id="theForm" class="simform">
+              <div class="simform-inner">
+                <ol class="questions">
+                  <li>
+                    <span
+                      ><label for="date"
+                        >Informe sua data de nascimento</label
+                      ></span
+                    >
+                    <input id="q1" name="date" type="date" />
+                  </li>
+                  <li>
+                    <span
+                      ><label for="time"
+                        >Informe sua hora de nascimento</label
+                      ></span
+                    >
+                    <input id="q2" name="time" type="time" />
+                  </li>
+                  <li>
+                    <span
+                      ><label for="place"
+                        >Informe seu local de nascimento</label
+                      ></span
+                    >
+                    <input
+                      id="q3"
+                      name="place"
+                      type="text"
+                      placeholder="Cidade, UF"
+                    />
+                  </li>
+                </ol>
+                <!-- /questions -->
+                <button class="submit" type="submit">
+                  Descobrir meu Destino
+                </button>
+                <div class="controls">
+                  <button class="next"></button>
+                  <div class="progress"></div>
+                  <span class="number">
+                    <span class="number-current"></span>
+                    <span class="number-total"></span>
+                  </span>
+                  <span class="error-message"></span>
+                </div>
+                <!-- / controls -->
+              </div>
+              <!-- /simform-inner -->
+              <span class="final-message"></span>
+            </form>
+            <!-- /simform -->
+          </div>
+        </div>
+      </div>
+      <span class="info">*Puxe para o lado</span>
+    </div>
+    <script src="js/rAF.js"></script>
+    <script src="js/bubbles.js"></script>
+    <script src="js/choose.js"></script>
+    <script src="js/classie.js"></script>
+    <script src="js/stepsForm.js"></script>
+    <script>
+      var theForm = document.getElementById("theForm");
+      //disable form autocomplete
+      theForm.setAttribute("autocomplete", "off");
+
+      new stepsForm(theForm, {
+        onSubmit: function (form) {
+          // hide form
+          classie.addClass(theForm.querySelector(".simform-inner"), "hide");
+
+          /*
+      form.submit()
+      or
+      AJAX request (maybe show loading indicator while we don't have an answer..)
+      */
+
+          // let's just simulate something...
+          var messageEl = theForm.querySelector(".final-message");
+          messageEl.innerHTML =
+            "Sua Linguagem de Programação Astral é:<br><div class='result'>" +
+            chooseLanguage(form) +
+            "</div>";
+          classie.addClass(messageEl, "show");
+        },
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script>
+      const swaper = new Swiper(".carousel", {
+        loop: false,
+        mousewheel: true,
+        keyboard: true,
+        // hashNavigation: true
+      });
+      const info = document.querySelector(".info");
+      if (window.location.hash) {
+        info.style.opacity = 0;
+      }
+      swaper.on("slideChange", function () {
+        info.style.transition = "0.8s";
+        info.style.opacity = 0;
+      });
+      swaper.on("activeIndexChange", function (swiper) {
+        const { activeIndex, slides } = swiper;
+        const slide = slides[activeIndex];
+        // if slide contains html input lock swiper
+        const input = slide.querySelector("input");
+        if (input) {
+          swaper.disable();
+        }
+      });
+    </script>
+  </body>
+</html>
