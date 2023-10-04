@@ -124,6 +124,21 @@ a:focus {
   padding: 10px;
 }
 
+.credits a {
+  color: #7e8286;
+}
+
+.credits {
+  position: absolute;
+  bottom: 0;
+  color: #f9f1e9;
+  font-size: 0.8em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+  font-family: "Young Serif", serif;
+  font-weight: normal;
+  right: 0;
+  padding: 10px;
+}
 .info.hidden {
   opacity: 0;
 }
